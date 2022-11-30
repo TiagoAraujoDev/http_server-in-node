@@ -1,0 +1,21 @@
+{
+  "name": "fullcurse_nodejs",
+  "version": "1.0.0",
+  "description": "An application to lear Node.js",
+  "main": "server.js",
+  "type": "CommonJS",
+  "scripts": {
+    "start": "node src/server",
+    "dev": "nodemon src/server"
+  },
+  "keywords": [],
+  "author": "Tiago Araujo",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "date-fns": "^2.29.3",
+    "uuid": "^9.0.0"
+  }
+}
