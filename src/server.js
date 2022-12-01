@@ -1,111 +1,60 @@
-const http = require("node:http");
-const fs = require("node:fs");
-const fsPromises = require("node:fs/promises");
+const express = require("express");
+const cors = require("cors");
 const path = require("node:path");
-const logEvents = require("./logEvents");
-const { EventEmitter } = require("node:events");
 
-class AppEmitter extends EventEmitter {}
+const { logger } = require("../middleware/logEvents");
+const { errorHandler } = require("../middleware/errorHandler");
 
-const appEmitter = new AppEmitter();
+const rootRoute = require("./routes/root.routes");
+const subdirRoute = require("./routes/subdir.routes");
 
-appEmitter.on("logs", (msg, fileName) => logEvents(msg, fileName));
+const app = express();
 
 const PORT = process.env.PORT || 8080;
 
-const serveFile = async (filePath, contentType, response) => {
-  try {
-    const data = await fsPromises.readFile(
-      filePath,
-      !contentType.includes("image") ? "utf8" : ""
-    );
-    response.writeHead(filePath.includes("404.html") ? 404 : 200, {
-      "Content-Type": contentType,
-    });
-    response.end(data);
-  } catch (error) {
-    console.log(error);
-    appEmitter.emit(
-      "logs",
-      `${error.name}: ${error.message}`,
-      "errorLogs.txt"
-    );
-    response.statusCode = 500;
-    response.end();
-  }
+const allowedDomains = [
+  "https://www.mysite.com",
+  "http://127.0.0.1:5500",
+  "http://localhost:8080"
+];
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (allowedDomains.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by cors"));
+    }
+  },
+  optionsSuccessStatus: 200
 };
 
-const server = http.createServer((request, response) => {
-  console.log(request.method, request.url);
-  appEmitter.emit(
-    "logs",
-    `${request.url}\t${request.method}`,
-    "requestLogs.txt"
-  );
+app.use(cors(corsOptions));
 
-  const extension = path.extname(request.url);
-  let contentType;
+// Custom middleware
+app.use(logger);
 
-  switch (extension) {
-    case ".css":
-      contentType = "text/css";
-      break;
-    case ".js":
-      contentType = "text/javascript";
-      break;
-    case ".json":
-      contentType = "text/json";
-      break;
-    case ".jpg":
-      contentType = "image/jpeg";
-      break;
-    case ".png":
-      contentType = "image/png";
-      break;
-    case ".txt":
-      contentType = "text/plain";
-      break;
-    default:
-      contentType = "text/html";
-      break;
-  }
+// Built-in middleware
+app.use(express.json());
 
-  let filePath =
-    contentType === "text/html" && request.url === "/"
-      ? path.join(__dirname, "..", "views", "index.html")
-      : contentType === "text/html" && request.url.slice(-1) === "/"
-      ? path.join(__dirname, "..", "views", request.url, "index.html")
-      : contentType === "text/html"
-      ? path.join(__dirname, "..", "views", request.url)
-      : path.join(__dirname, "..", request.url);
+app.use("/", express.static(path.join(__dirname, "..", "/public")));
+app.use("/subdir", express.static(path.join(__dirname, "..", "/public")));
 
-  // makes .html extension not required in the browser
-  if (!extension && request.url.slice(-1) !== "/") filePath += ".html";
+// Routing
+app.use("^/$", rootRoute);
+app.use("/subdir", subdirRoute);
 
-  const fileExist = fs.existsSync(filePath);
-
-  if (fileExist) {
-    // serve page
-    serveFile(filePath, contentType, response);
+app.all("*", (req, res) => {
+  res.status(404);
+  if (req.accepts("html")) {
+    res.sendFile(path.join(__dirname, "..", "views", "404.html"));
+  } else if (req.accepts("json")) {
+    res.json({ error: "404 | Not found!" });
   } else {
-    switch (path.parse(filePath).base) {
-      case "old-page.html":
-        response.writeHead(301, { Location: "/new-page.html" });
-        response.end();
-        break;
-      case "www-page.html":
-        response.writeHead(301, { Location: "/" });
-        response.end();
-        break;
-      default:
-        // serve a 404 page
-        serveFile(
-          path.join(__dirname, "..", "views", "404.html"),
-          "text/html",
-          response
-        );
-    }
+    res.send("404 | Not found!");
   }
 });
 
-server.listen(PORT, console.log(`Server runnig on port ${8080}`));
+app.use(errorHandler);
+
+app.listen(PORT, () => console.log(`Server runnig on port ${8080}`));
