@@ -1,15 +1,49 @@
-20221130	16:32:15	30e7cc9a-ad02-4a74-9e5e-f139901a6616	/index	GET
-20221130	16:32:15	eeca7e90-da13-4bf7-bda0-4ce6d59a12db	/css/style.css	GET
-20221130	16:33:03	a5a253ed-f4a7-442e-8758-444cdc034d53	/subdir/	GET
-20221130	16:33:03	933ce5be-3af2-44f7-87c1-03628f8e6c4f	/css/style.css	GET
-20221130	16:33:58	dfd84885-5c12-4960-b35f-85329694a137	/new-page.html	GET
-20221130	16:33:58	dae7e6ce-96d6-4a1f-99ff-b983b0d97394	/css/style.css	GET
-20221130	16:33:58	b504579b-f526-4127-aac4-e8e0a508530a	/img/avatar.jpg	GET
-20221130	16:34:49	17ba2c7c-5aee-4b60-a362-1670c7645530	/	GET
-20221130	16:35:53	94a5e1d1-79a0-49a5-b751-fc38d0a329f1	/	GET
-20221130	16:36:18	7eec0eab-e170-42ce-a605-f44eca2e009f	/	GET
-20221130	16:36:18	1e394135-ab75-41b1-8751-87938e2528bc	/css/style.css	GET
-20221130	16:38:13	57371abd-1c4f-472b-b483-349c3c59a0fc	/	GET
-20221130	16:38:13	97393ebb-9c6e-47b2-b00d-e2c09044323b	/css/style.css	GET
-20221130	16:38:21	3488a7eb-9971-44c6-82e6-d3302ff83b52	/fjj	GET
-20221130	16:38:21	8bdbfee7-a9e9-4f20-b23e-41ff67aceed3	/css/style.css	GET
+20221201	14:21:47	848c051e-610a-408b-8da2-95654464a7b6	GET	undefined	/
+20221201	14:21:47	55965afc-6619-42c0-8943-5dac6a915f89	GET	undefined	/css/style.css
+20221201	14:43:07	0496e0d1-87bf-4a51-b1c5-806b232422aa	GET	undefined	/
+20221201	14:43:07	833e31cf-3e98-44c8-8a89-4eaa627dd295	GET	undefined	/css/style.css
+20221201	14:47:07	6b7d1880-f6fc-46c0-9627-7b137d620ce0	GET	https://www.google.com.br	/
+20221201	14:48:04	6d8c810e-6d64-4f7f-91e8-1b71b46e625b	OPTIONS	https://www.google.com.br	/
+20221201	14:48:04	e2436a54-0395-4588-974c-23e33f5c0215	GET	https://www.google.com.br	/
+20221201	14:50:23	935fe2dc-27e1-4cfe-bb43-a1560f6a97f1	OPTIONS	https://www.google.com.br	/
+20221201	14:50:23	80664d99-35b9-4df3-b690-844ccb1d0613	GET	https://www.google.com.br	/
+20221201	14:50:50	80581495-be6e-4ee7-91df-80259c74fa8b	GET	https://www.google.com.br	/
+20221201	16:06:21	2a3e90f3-12d1-4ac9-a0a7-fc2eff017e05	GET	undefined	/
+20221201	16:06:21	8073c51b-6a03-4235-918f-410d958f2f7a	GET	undefined	/css/style.css
+20221201	16:18:42	c26a9dd5-3809-40c0-ad4a-42b34d6d80fc	GET	undefined	/
+20221201	16:18:42	f9f11bb3-a127-4a72-b399-c1784b377514	GET	undefined	/css/style.css
+20221201	16:20:08	10bed273-e30a-4bee-82a2-17ad7f9182fa	GET	undefined	/
+20221201	16:20:47	d03a4d68-c68e-48a9-b8a5-da71fa5b0376	GET	undefined	/
+20221201	16:20:47	8dedabc6-37d0-4d2a-854c-3626f1bb2db5	GET	undefined	/css/style.css
+20221201	16:28:12	eb1ac1f4-f95a-48df-9475-ce07fbbad247	GET	undefined	/page
+20221201	16:28:12	75247c3d-854d-47cf-bdab-55227630ae84	GET	undefined	/css/style.css
+20221201	16:28:31	62556b5c-9c75-44d0-947f-5d9676d4dbf1	GET	undefined	/
+20221201	16:28:31	1558a188-7560-448d-96aa-4a7290c703ee	GET	undefined	/css/style.css
+20221201	16:51:38	6fb59547-f891-4a1a-90da-07b489845947	GET	undefined	/subdir
+20221201	16:51:38	031e6cba-5936-427a-bbab-68a117be5f8a	GET	undefined	/subdir/
+20221201	16:53:10	b6d86232-582b-49db-b4ea-8861b7dda389	GET	undefined	/subdir/
+20221201	16:53:10	46922b15-1743-4bd6-8eca-c2a1164b74cb	GET	undefined	/subdir/css/style.css
+20221201	16:53:18	93385fc6-530a-4ed7-9ba0-07a5b760b423	GET	undefined	/subdir/index
+20221201	16:53:18	1eaf828b-9720-4074-9d00-9c68db229f48	GET	undefined	/subdir/css/style.css
+20221201	16:53:56	713cc305-e8bc-493f-a075-f64d42fa7499	GET	undefined	/subdir/index
+20221201	16:53:56	2b42651b-525e-498f-a9bf-3a613a3c3181	GET	undefined	/subdir/css/style.css
+20221201	16:54:00	cad43778-68ab-4058-92ed-6cdb88b3a3b9	GET	undefined	/subdir/
+20221201	16:54:00	6aa4585e-d5bd-4c27-8728-b7f744b75b40	GET	undefined	/subdir/css/style.css
+20221201	16:56:37	81717270-3034-46dc-8fce-0c2110a6ec98	GET	undefined	/subdir/index
+20221201	16:56:37	1b5049dd-6578-42fa-ad38-f66639e9af35	GET	undefined	/subdir/css/style.css
+20221201	16:57:24	93bc30b3-3322-414b-985c-90678dd15e54	GET	undefined	/subdir/index
+20221201	16:57:24	85ca94ab-c5d9-4c09-b922-4b825cd02a5e	GET	undefined	/subdir/css/style.css
+20221201	16:57:30	a0ddfdff-b32e-4932-a663-85b21cc928c4	GET	undefined	/subdir/
+20221201	16:57:30	207c3ddf-743f-4627-867f-bacaeee9fd10	GET	undefined	/subdir/css/style.css
+20221201	16:57:37	7db98445-147a-47e0-b13e-96243dc4c107	GET	undefined	/subdir/index.html
+20221201	16:57:37	21e0ae26-47db-4d6b-b5a6-4a994a43a7f6	GET	undefined	/subdir/css/style.css
+20221201	16:58:55	696abe01-a2b8-4ebf-850f-968862ebe1a2	GET	undefined	/subdir/index.html
+20221201	16:58:55	10783695-02cc-4781-9b14-1953e1111d09	GET	undefined	/subdir/css/style.css
+20221201	16:59:02	57488727-3ad9-4bfb-88ff-967e431c2187	GET	undefined	/subdir/index
+20221201	16:59:02	3a4da1a4-a453-42d9-b87b-716dc2da5366	GET	undefined	/subdir/css/style.css
+20221201	16:59:14	f2e6ec7f-15a6-4692-bffd-ca7bf34dd170	GET	undefined	/subdir/index
+20221201	16:59:14	876d83e7-1b43-4c33-8b88-fe944c0076f3	GET	undefined	/subdir/css/style.css
+20221201	22:00:02	e4e11ad0-e245-400b-bdb6-d896ee375390	GET	undefined	/api/employees/
+20221201	22:07:08	8b9736d5-17bd-483a-ae2a-f7bf12ddc4fe	GET	undefined	/
+20221201	22:07:08	1b472806-cc4a-4d3e-8c2a-7963f62c851e	GET	undefined	/css/style.css
+20221201	22:07:21	7770b467-4892-4597-ad88-b174e3462974	GET	undefined	/api/employees/
