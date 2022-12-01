@@ -7,6 +7,7 @@ const { errorHandler } = require("../middleware/errorHandler");
 
 const rootRoute = require("./routes/root.routes");
 const subdirRoute = require("./routes/subdir.routes");
+const employeesRoutes = require("./routes/api/employees.routes");
 
 const app = express();
 
@@ -43,6 +44,7 @@ app.use("/subdir", express.static(path.join(__dirname, "..", "/public")));
 // Routing
 app.use("^/$", rootRoute);
 app.use("/subdir", subdirRoute);
+app.use("/api/employees", employeesRoutes);
 
 app.all("*", (req, res) => {
   res.status(404);

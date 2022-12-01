@@ -1,5 +1,7 @@
 [
-  { "name": "Tiago", "age": 28 },
-  { "name": "Felipe", "age": 23 },
-  { "name": "Mary","age": 28 }
+  { "id": 1, "name": "Felipe Araujo", "age": 23, "isWorking": true },
+  { "id": 2, "name": "Mary da Silva", "age": 28, "isWorking": true },
+  { "id": 3, "name": "Tiago Araujo", "age": 28, "isWorking": false },
+  { "id": 4, "name": "Andre Souto", "age": 50, "isWorking": true },
+  { "id": 5, "name": "Andrezza Moreira", "age": 40, "isWorking": true }
 ]
