@@ -43,3 +43,7 @@
 20221201	16:59:02	3a4da1a4-a453-42d9-b87b-716dc2da5366	GET	undefined	/subdir/css/style.css
 20221201	16:59:14	f2e6ec7f-15a6-4692-bffd-ca7bf34dd170	GET	undefined	/subdir/index
 20221201	16:59:14	876d83e7-1b43-4c33-8b88-fe944c0076f3	GET	undefined	/subdir/css/style.css
+20221201	22:00:02	e4e11ad0-e245-400b-bdb6-d896ee375390	GET	undefined	/api/employees/
+20221201	22:07:08	8b9736d5-17bd-483a-ae2a-f7bf12ddc4fe	GET	undefined	/
+20221201	22:07:08	1b472806-cc4a-4d3e-8c2a-7963f62c851e	GET	undefined	/css/style.css
+20221201	22:07:21	7770b467-4892-4597-ad88-b174e3462974	GET	undefined	/api/employees/
