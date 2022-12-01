@@ -1,3 +1,0 @@
-20221201	16:18:01	7da18578-c93c-4590-8d10-4319cac9fad5	Error: Not allowed by cors
-20221201	16:20:08	270e16b3-c9a8-4a53-b422-9736c92f3419	Error: ENOENT: no such file or directory, stat '/home/tma/Documents/GitHub/fullCurse_nodejs/view/index.html'
-20221201	16:51:38	98c657d4-31a3-432a-a379-bbe4ff9c0abb	Error: ENOENT: no such file or directory, stat '/home/tma/Documents/GitHub/fullCurse_nodejs/src/views/subdir/index.html'
