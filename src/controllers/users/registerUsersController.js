@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt");
+const { v4: uuid } = require("uuid");
 const fsPromises = require("node:fs/promises");
 const path = require("node:path");
 
@@ -28,6 +29,7 @@ const handleNewUser = async (req, res) => {
     const hashedPwd = await bcrypt.hash(password, 8);
 
     const newUser = {
+      id: uuid(),
       name,
       email,
       password: hashedPwd
