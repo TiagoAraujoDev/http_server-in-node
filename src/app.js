@@ -7,8 +7,7 @@ const corsOptions = require("./config/corsOptions");
 const { logger } = require("./middleware/logEvents");
 const errorHandler = require("./middleware/errorHandler");
 
-const rootRoutes = require("./routes/root.routes");
-const employeesRoutes = require("./routes/api/employees.routes");
+const router = require("./routes");
 
 const app = express();
 
@@ -23,8 +22,7 @@ app.use(express.json());
 app.use("/", express.static(path.join(__dirname, "..", "/public")));
 
 // Routing
-app.use("^/$", rootRoutes);
-app.use("/api/employees", employeesRoutes);
+app.use(router);
 
 app.all("*", (req, res) => {
   res.status(404);
