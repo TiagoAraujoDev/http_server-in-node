@@ -1,8 +1,12 @@
 const { Router } = require("express");
 
+const ensureAuthenticate = require("../../middleware/authentication");
+
 const employeesController = require("../../controllers/employeesController");
 
 const employeesRoutes = Router();
+
+employeesRoutes.use(ensureAuthenticate);
 
 employeesRoutes
   .route("/")
