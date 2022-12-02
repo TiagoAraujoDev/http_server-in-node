@@ -1,24 +1,27 @@
-const data = {
-  employees: require("../models/data.json")
+const employeesDB = {
+  employees: require("../models/data.json"),
+  setEmployees: function (data) {
+    this.employees = data;
+  }
 };
 
 const getAllEmployees = (req, res) => {
-  res.json(data.employees);
+  return res.json(employeesDB.employees);
 };
 
 const createEmployee = (req, res) => {
   const { name, age, isWorking } = req.body;
 
   if (!name || !age || !isWorking) {
-    res.status(400).send("Missing body information!");
+    return res.status(400).send("Missing body information!");
   }
 
   let id;
 
-  if (data.employees.length === 0) {
+  if (employeesDB.employees.length === 0) {
     id = 1;
   } else {
-    id = data.employees.length + 1;
+    id = employeesDB.employees.length + 1;
   }
 
   const newEmployee = {
@@ -28,21 +31,23 @@ const createEmployee = (req, res) => {
     isWorking
   };
 
-  data.employees.push(newEmployee);
+  employeesDB.setEmployees([...employeesDB.employees, newEmployee]);
 
-  res.status(201).json(newEmployee);
+  return res.status(201).json(newEmployee);
 };
 
 const updateEmployeeStatus = (req, res) => {
   const { id } = req.body;
 
-  const isValidId = data.employees.some((employee) => employee.id === id);
+  const isValidId = employeesDB.employees.some(
+    (employee) => employee.id === id
+  );
 
   if (!isValidId) {
-    res.status(400).send("There's no employee with the given id!");
+    return res.status(400).send("There's no employee with the given id!");
   }
 
-  const newEmployeesData = data.employees.map((employee) => {
+  const newEmployeesData = employeesDB.employees.map((employee) => {
     if (employee.id === id) {
       employee.isWorking = !employee.isWorking;
       return employee;
@@ -50,41 +55,43 @@ const updateEmployeeStatus = (req, res) => {
     return employee;
   });
 
-  data.employees = [...newEmployeesData];
+  employeesDB.setEmployees([...newEmployeesData]);
 
-  res.status(201).json(data.employees);
+  return res.status(201).json(employeesDB.employees);
 };
 
 const deleteEmployee = (req, res) => {
   const { id } = req.body;
 
-  const isValidId = data.employees.some((employee) => employee.id === id);
+  const isValidId = employeesDB.employees.some(
+    (employee) => employee.id === id
+  );
 
   if (!isValidId) {
-    res.status(400).send("There's no employee with the given id!");
+    return res.status(400).send("There's no employee with the given id!");
   }
 
-  const newEmployeesData = data.employees.filter(
+  const newEmployeesData = employeesDB.employees.filter(
     (employee) => employee.id !== id
   );
 
-  data.employees = [...newEmployeesData];
+  employeesDB.setEmployees([...newEmployeesData]);
 
-  res.status(204).end();
+  return res.status(204).end();
 };
 
 const getEmployee = (req, res) => {
   const { id } = req.params;
 
-  const employee = data.employees.find(
+  const employee = employeesDB.employees.find(
     (employee) => employee.id === parseInt(id)
   );
 
   if (!employee) {
-    res.status(400).send("Employee not found!");
+    return res.status(400).send("Employee not found!");
   }
 
-  res.json(employee);
+  return res.json(employee);
 };
 
 module.exports = {
