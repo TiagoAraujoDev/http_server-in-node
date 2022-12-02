@@ -1,5 +1,5 @@
 /node_modules
 /logs
-models/*
+src/models/*
 !*/.gitkeep
 .env
