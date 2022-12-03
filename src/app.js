@@ -7,20 +7,22 @@ const corsOptions = require("./config/corsOptions");
 
 const { logger } = require("./middleware/logEvents");
 const errorHandler = require("./middleware/errorHandler");
+const credentials = require("./middleware/credentials");
 
 const router = require("./routes");
 
 const app = express();
 
+app.use(credentials);
 app.use(cors(corsOptions));
 
 // Custom middleware
 app.use(logger);
 
-app.use(cookieParser());
-
 // Built-in middleware
 app.use(express.json());
+
+app.use(cookieParser());
 
 app.use("/", express.static(path.join(__dirname, "..", "/public")));
 
