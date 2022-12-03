@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 const path = require("node:path");
 
 const corsOptions = require("./config/corsOptions");
@@ -15,6 +16,8 @@ app.use(cors(corsOptions));
 
 // Custom middleware
 app.use(logger);
+
+app.use(cookieParser());
 
 // Built-in middleware
 app.use(express.json());

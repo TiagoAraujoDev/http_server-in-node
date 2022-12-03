@@ -52,8 +52,10 @@ const handleAuthUser = async (req, res) => {
       JSON.stringify(usersDB.users)
     );
 
-    res.cookie("@node_server:jwt", refreshToken, {
+    res.cookie("jwt", refreshToken, {
       httpOnly: true,
+      sameSite: "None",
+      secure: true,
       maxAge: 1000 * 60 * 60 * 24
     });
     return res.status(200).json({ token: accessToken });
