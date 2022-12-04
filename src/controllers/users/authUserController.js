@@ -3,8 +3,6 @@ const bcrypt = require("bcrypt");
 const fsPromises = require("node:fs/promises");
 const path = require("node:path");
 
-require("dotenv").config();
-
 const usersDB = {
   users: require("../../models/users.json"),
   setUsers: function (data) {
