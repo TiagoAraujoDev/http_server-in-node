@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser");
 const path = require("node:path");
 
 const corsOptions = require("./config/cors/corsOptions");
+const createMongodbConnection = require("./config/db/mongoDB");
 
 const { logger } = require("./middleware/logEvents");
 const errorHandler = require("./middleware/errorHandler");
@@ -14,6 +15,8 @@ const router = require("./routes");
 const createAdmin = require("./config/admin");
 
 const app = express();
+
+createMongodbConnection();
 
 app.use(credentials);
 app.use(cors(corsOptions));
