@@ -35,9 +35,9 @@ const handleLogout = async (req, res) => {
   const newUsersDBData = usersDB.users.map((user) => {
     if (user.id === userId) {
       return { ...user, refresh_token: "" };
+    } else {
+      return user;
     }
-
-    return user;
   });
 
   usersDB.setUsers([...newUsersDBData]);

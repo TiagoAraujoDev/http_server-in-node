@@ -28,10 +28,16 @@ const handleAuthUser = async (req, res) => {
   }
 
   try {
-    const accessToken = jwt.sign({}, process.env.ACCESS_TOKEN_SECRET, {
-      subject: user.id,
-      expiresIn: "30s"
-    });
+    const roles = Object.values(user.roles);
+
+    const accessToken = jwt.sign(
+      { roles: roles },
+      process.env.ACCESS_TOKEN_SECRET,
+      {
+        subject: user.id,
+        expiresIn: "30s"
+      }
+    );
 
     const refreshToken = jwt.sign({}, process.env.REFRESH_TOKEN_SECRET, {
       subject: user.id,
@@ -40,9 +46,10 @@ const handleAuthUser = async (req, res) => {
 
     const usersUpdateDB = usersDB.users.map((usr) => {
       if (usr.id === user.id) {
-        return { ...user, refresh_token: refreshToken };
+        return { ...usr, refresh_token: refreshToken };
+      } else {
+        return usr;
       }
-      return user;
     });
 
     usersDB.setUsers([...usersUpdateDB]);

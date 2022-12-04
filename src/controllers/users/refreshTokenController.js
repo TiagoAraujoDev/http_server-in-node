@@ -28,10 +28,16 @@ const handleRefreshToken = (req, res) => {
   }
 
   try {
-    const accessToken = jwt.sign({}, process.env.REFRESH_TOKEN_SECRET, {
-      subject: userId,
-      expiresIn: "30s"
-    });
+    const roles = Object.values(user.roles);
+
+    const accessToken = jwt.sign(
+      { roles: roles },
+      process.env.REFRESH_TOKEN_SECRET,
+      {
+        subject: userId,
+        expiresIn: "30s"
+      }
+    );
 
     return res.json({ token: accessToken });
   } catch (error) {

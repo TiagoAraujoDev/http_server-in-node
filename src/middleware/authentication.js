@@ -10,9 +10,9 @@ require("dotenv").config();
 }; */
 
 const ensureAuthenticate = async (req, res, next) => {
-  const authHeader = req.headers.authorization;
+  const authHeader = req.headers.authorization || req.headers.Authorization;
 
-  if (!authHeader) {
+  if (!authHeader?.startsWith("Bearer ")) {
     // 401 => unauthorized request
     return res.status(401).json({ message: "Missing token!" });
   }
@@ -20,10 +20,14 @@ const ensureAuthenticate = async (req, res, next) => {
   const [, token] = authHeader.split(" "); // Bearer s0d8f69s0d9f7f0d9d0897f
 
   try {
-    const { sub: userId } = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+    const { sub: userId, roles } = jwt.verify(
+      token,
+      process.env.ACCESS_TOKEN_SECRET
+    );
 
     req.user = {
-      id: userId
+      id: userId,
+      roles: roles
     };
 
     next();

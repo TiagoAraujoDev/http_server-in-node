@@ -10,6 +10,7 @@ const errorHandler = require("./middleware/errorHandler");
 const credentials = require("./middleware/credentials");
 
 const router = require("./routes");
+const createAdmin = require("./config/admin");
 
 const app = express();
 
@@ -21,10 +22,10 @@ app.use(logger);
 
 // Built-in middleware
 app.use(express.json());
-
 app.use(cookieParser());
-
 app.use("/", express.static(path.join(__dirname, "..", "/public")));
+
+createAdmin();
 
 // Routing
 app.use(router);
