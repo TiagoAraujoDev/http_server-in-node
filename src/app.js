@@ -3,7 +3,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const path = require("node:path");
 
-const corsOptions = require("./config/corsOptions");
+const corsOptions = require("./config/cors/corsOptions");
 
 const { logger } = require("./middleware/logEvents");
 const errorHandler = require("./middleware/errorHandler");
