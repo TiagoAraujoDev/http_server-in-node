@@ -37,7 +37,7 @@ app.use(router);
 app.all("*", (req, res) => {
   res.status(404);
   if (req.accepts("html")) {
-    return res.sendFile(path.join(__dirname, "..", "views", "404.html"));
+    return res.sendFile(path.join(__dirname, "views", "404.html"));
   } else if (req.accepts("json")) {
     return res.json({ error: "404 | Not found!" });
   } else {
