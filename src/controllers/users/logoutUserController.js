@@ -1,14 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-const fsPromises = require("node:fs/promises");
-const path = require("node:path");
-
-const usersDB = {
-  users: require("../../models/users.json"),
-  setUsers: function (data) {
-    this.users = data;
-  }
-};
+const User = require("../../models/User");
 
 const handleLogout = async (req, res) => {
   const cookies = req.cookies;
@@ -19,32 +11,19 @@ const handleLogout = async (req, res) => {
 
   const refreshToken = cookies.jwt;
 
-  const { sub: userId } = jwt.verify(
+  const { sub: userEmail } = jwt.verify(
     refreshToken,
     process.env.REFRESH_TOKEN_SECRET
   );
 
-  const user = usersDB.users.find((user) => user.id === userId);
+  const user = await User.findOne({ email: userEmail }).exec();
 
   if (!user) {
     res.clearCookie(jwt, { httpOnly: true, sameSite: "None", secure: true });
     return res.sendStatus(204);
   }
 
-  const newUsersDBData = usersDB.users.map((user) => {
-    if (user.id === userId) {
-      return { ...user, refresh_token: "" };
-    } else {
-      return user;
-    }
-  });
-
-  usersDB.setUsers([...newUsersDBData]);
-
-  await fsPromises.writeFile(
-    path.join(__dirname, "..", "..", "models", "users.json"),
-    JSON.stringify(usersDB.users)
-  );
+  await User.updateOne({ email: userEmail }, { $unset: { refresh_token: "" } });
 
   res.clearCookie(jwt, { httpOnly: true, sameSite: "None", secure: true });
   return res.sendStatus(204);

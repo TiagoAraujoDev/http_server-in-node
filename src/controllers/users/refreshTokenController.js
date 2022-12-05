@@ -1,13 +1,8 @@
 const jwt = require("jsonwebtoken");
 
-const userDB = {
-  users: require("../../models/users.json"),
-  setUsers: function (data) {
-    this.users = data;
-  }
-};
+const User = require("../../models/User");
 
-const handleRefreshToken = (req, res) => {
+const handleRefreshToken = async (req, res) => {
   const cookies = req.cookies;
 
   if (!cookies?.jwt) {
@@ -15,26 +10,26 @@ const handleRefreshToken = (req, res) => {
   }
 
   const refreshToken = cookies.jwt;
-  const { sub: userId } = jwt.verify(
+  const { sub: userEmail } = jwt.verify(
     refreshToken,
     process.env.REFRESH_TOKEN_SECRET
   );
 
-  const user = userDB.users.find((user) => user.id === userId);
+  const user = await User.findOne({ email: userEmail }).exec();
 
   if (!user) {
     res.sendStatus(403);
   }
 
-  try {
-    const roles = Object.values(user.roles);
+  const roles = Object.values(user.roles);
 
+  try {
     const accessToken = jwt.sign(
       { roles: roles },
       process.env.REFRESH_TOKEN_SECRET,
       {
-        subject: userId,
-        expiresIn: "30s"
+        subject: userEmail,
+        expiresIn: "10m"
       }
     );
 

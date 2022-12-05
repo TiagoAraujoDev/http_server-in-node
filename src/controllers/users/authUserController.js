@@ -1,19 +1,12 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const fsPromises = require("node:fs/promises");
-const path = require("node:path");
 
-const usersDB = {
-  users: require("../../models/users.json"),
-  setUsers: function (data) {
-    this.users = data;
-  }
-};
+const User = require("../../models/User");
 
 const handleAuthUser = async (req, res) => {
   const { email, password } = req.body;
 
-  const user = usersDB.users.find((user) => user.email === email);
+  const user = await User.findOne({ email: email }).exec();
 
   if (!user) {
     return res.status(401).json({ message: "Email or password incorrect!" });
@@ -25,36 +18,26 @@ const handleAuthUser = async (req, res) => {
     return res.status(401).json({ message: "Email or password incorrect!" });
   }
 
-  try {
-    const roles = Object.values(user.roles);
+  const roles = Object.values(user.roles);
 
+  try {
     const accessToken = jwt.sign(
       { roles: roles },
       process.env.ACCESS_TOKEN_SECRET,
       {
-        subject: user.id,
-        expiresIn: "30s"
+        subject: user.email,
+        expiresIn: "10m"
       }
     );
 
     const refreshToken = jwt.sign({}, process.env.REFRESH_TOKEN_SECRET, {
-      subject: user.id,
+      subject: user.email,
       expiresIn: "15d"
     });
 
-    const usersUpdateDB = usersDB.users.map((usr) => {
-      if (usr.id === user.id) {
-        return { ...usr, refresh_token: refreshToken };
-      } else {
-        return usr;
-      }
-    });
-
-    usersDB.setUsers([...usersUpdateDB]);
-
-    await fsPromises.writeFile(
-      path.join(__dirname, "..", "..", "models", "users.json"),
-      JSON.stringify(usersDB.users)
+    await User.updateOne(
+      { email: user.email },
+      { $set: { refresh_token: refreshToken } }
     );
 
     res.cookie("jwt", refreshToken, {
