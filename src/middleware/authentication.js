@@ -11,13 +11,13 @@ const ensureAuthenticate = async (req, res, next) => {
   const [, token] = authHeader.split(" "); // Bearer s0d8f69s0d9f7f0d9d0897f
 
   try {
-    const { sub: userId, roles } = jwt.verify(
+    const { sub: userEmail, roles } = jwt.verify(
       token,
       process.env.ACCESS_TOKEN_SECRET
     );
 
     req.user = {
-      id: userId,
+      email: userEmail,
       roles: roles
     };
 
