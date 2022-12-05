@@ -8,6 +8,6 @@ const router = Router();
 
 router.use("^/$", rootRoutes);
 router.use("/api/employees", employeesRoutes);
-router.use("/users", usersRoutes);
+router.use("/api/users", usersRoutes);
 
 module.exports = router;

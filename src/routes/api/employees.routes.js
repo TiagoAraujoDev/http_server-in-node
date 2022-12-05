@@ -5,7 +5,7 @@ const ensureRoles = require("../../middleware/ensureRoles");
 
 const ROLES_LIST = require("../../config/rolesList");
 
-const employeesController = require("../../controllers/employeesController");
+const employeesController = require("../../controllers/employees/employeesController");
 
 const employeesRoutes = Router();
 
@@ -17,12 +17,19 @@ employeesRoutes
   .post(
     ensureRoles(ROLES_LIST.editor, ROLES_LIST.admin),
     employeesController.createEmployee
-  )
-  .put(
-    ensureRoles(ROLES_LIST.editor, ROLES_LIST.admin),
-    employeesController.updateEmployeeStatus
-  )
-  .delete(ensureRoles(ROLES_LIST.admin), employeesController.deleteEmployee);
+  );
+
+employeesRoutes.put(
+  "/:id",
+  ensureRoles(ROLES_LIST.editor, ROLES_LIST.admin),
+  employeesController.updateEmployee
+);
+
+employeesRoutes.delete(
+  "/:id",
+  ensureRoles(ROLES_LIST.admin),
+  employeesController.deleteEmployee
+);
 
 employeesRoutes.get("/:id", employeesController.getEmployee);
 
