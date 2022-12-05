@@ -12,7 +12,7 @@ const errorHandler = require("./middleware/errorHandler");
 const credentials = require("./middleware/credentials");
 
 const router = require("./routes");
-const createAdmin = require("./config/admin");
+const createAdmin = require("./config/db/seeds/seedAdmin");
 
 const app = express();
 
